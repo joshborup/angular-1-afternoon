@@ -15,17 +15,18 @@
             <input class="form-control" ng-model="filters.name" placeholder="Search Name">
             <input class="form-control" ng-model="filters.state" placeholder="Search State">
 
-          <select class="input-medium" ng-model="sorts.property">
-            <option value='name'>Name</option>
+          <select class="input-medium" ng-options="option.label for option in options" ng-model="option">
+            <!-- <option value='name'>Name</option>
             <option value='friend_count'>#Friends</option>
             <option value='location.city'>City</option>
             <option value='location.state'>State</option>
-            <option value='location.country'>Country</option>
+            <option value='location.country'>Country</option> -->
           </select>
 
-          <select class="input-medium" ng-model="sorts.direction">
-            <option value="-">Descending</option>
-            <option value="+">Ascending</option>
+          <select class="input-medium" ng-options="direction.label for direction in directions" ng-model="direction">
+
+            <!-- <option value="-">Descending</option>
+            <option value="+">Ascending</option> -->
           </select>
         </div>
       </form>
@@ -44,7 +45,7 @@
             Friends: 1,367
           </div>
         </li>
-        <li  class='friend' ng-repeat="friend in friends | filter:{name: filters.name, location: {state: filters.state}} | orderBy:sorts.direction + sorts.property">
+        <li  class='friend' ng-repeat="friend in friends | filter:{name: filters.name, location: {state: filters.state}} | orderBy:direction.value + option.value">
           <img class='profile-pic' src="{{friend.pic_square}}">
           <h3>{{friend.name}}</h3>
           <div class="location">
